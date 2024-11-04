@@ -100,6 +100,8 @@ const Weather = () => {
                     <h2 className="city-name">Weather in {weatherData.name}</h2>
                     <p className="temperature">Temperature: {weatherData.main.temp}°C</p>
                     <p className="condition">Condition: {weatherData.weather[0].description}</p>
+                    <p className="wind">Wind Speed: {weatherData.wind.speed} m/s</p>
+                    <p className="humidity">Humidity: {weatherData.main.humidity}%</p>
 
                     {/* Interval selection */}
                     <div className="interval-selection">
@@ -118,7 +120,8 @@ const Weather = () => {
                             <ul>
                                 {forecastData.hourly.slice(0, 12).map((hour, index) => (
                                     <li key={index}>
-                                        <strong>Hour {index + 1}:</strong> {hour.temp}°C, {hour.weather[0].description}
+                                        <strong>Hour {index + 1}:</strong> {hour.temp}°C, {hour.weather[0].description}, 
+                                        Wind: {hour.wind_speed} m/s, Humidity: {hour.humidity}%
                                     </li>
                                 ))}
                             </ul>
@@ -131,7 +134,8 @@ const Weather = () => {
                             <ul>
                                 {forecastData.daily.slice(0, 7).map((day, index) => (
                                     <li key={index}>
-                                        <strong>Day {index + 1}:</strong> {day.temp.day}°C, {day.weather[0].description}
+                                        <strong>Day {index + 1}:</strong> {day.temp.day}°C, {day.weather[0].description}, 
+                                        Wind: {day.wind_speed} m/s, Humidity: {day.humidity}%
                                     </li>
                                 ))}
                             </ul>

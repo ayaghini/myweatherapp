@@ -50,7 +50,6 @@ WeatherApp is a responsive, user-friendly web application built with React, Vite
 ## Enhancements
 Future improvements could include:
 - Adding a search history feature.
-- Displaying additional weather details (e.g., wind direction, pressure).
 - Implementing a dark mode for better usability.
 
 ## License
@@ -60,8 +59,5 @@ This project is open source and available under the [MIT License](LICENSE).
 Contributions are welcome! Please submit a pull request or open an issue to discuss changes.
 
 ## Contact
-For questions or suggestions, please reach out at [your.email@example.com].
+For questions or suggestions, please reach out at here at github.
 
----
-
-**Note**: Replace `your_api_key_here`, `https://github.com/yourusername/weather-app.git`, and contact details with your actual information.
