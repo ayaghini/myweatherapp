@@ -7,6 +7,7 @@ const Weather = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [forecastData, setForecastData] = useState(null);
     const [interval, setInterval] = useState('current'); 
+    const [unit, setUnit] = useState('metric'); 
     const [error, setError] = useState(null);
 
     const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY; 
@@ -72,6 +73,11 @@ const Weather = () => {
         }
     };
 
+    const handleUnitToggle = () => {
+        const newUnit = unit === 'metric' ? 'imperial' : 'metric';
+        setUnit(newUnit);
+    };
+
     const handleIntervalChange = (e) => {
         setInterval(e.target.value);
     };
@@ -98,10 +104,20 @@ const Weather = () => {
             {weatherData && (
                 <div className="weather-info">
                     <h2 className="city-name">Weather in {weatherData.name}</h2>
-                    <p className="temperature">Temperature: {weatherData.main.temp}°C</p>
+                    <p className="temperature">
+                        Temperature: {weatherData.main.temp}°{unit === 'metric' ? 'C' : 'F'}
+                    </p>
                     <p className="condition">Condition: {weatherData.weather[0].description}</p>
-                    <p className="wind">Wind Speed: {weatherData.wind.speed} m/s</p>
+                    <p className="wind">Wind Speed: {weatherData.wind.speed} {unit === 'metric' ? 'm/s' : 'mph'}</p>
                     <p className="humidity">Humidity: {weatherData.main.humidity}%</p>
+
+                    {/* Toggle for temperature unit */}
+                    <div className="unit-toggle">
+                        <label htmlFor="unit-toggle">Temperature Unit:</label>
+                        <button onClick={handleUnitToggle} className="toggle-button">
+                            {unit === 'metric' ? 'Switch to °F' : 'Switch to °C'}
+                        </button>
+                    </div>
 
                     {/* Interval selection */}
                     <div className="interval-selection">
@@ -120,8 +136,9 @@ const Weather = () => {
                             <ul>
                                 {forecastData.hourly.slice(0, 12).map((hour, index) => (
                                     <li key={index}>
-                                        <strong>Hour {index + 1}:</strong> {hour.temp}°C, {hour.weather[0].description}, 
-                                        Wind: {hour.wind_speed} m/s, Humidity: {hour.humidity}%
+                                        <strong>Hour {index + 1}:</strong> {hour.temp}°{unit === 'metric' ? 'C' : 'F'}, 
+                                        {hour.weather[0].description}, Wind: {hour.wind_speed} {unit === 'metric' ? 'm/s' : 'mph'}, 
+                                        Humidity: {hour.humidity}%
                                     </li>
                                 ))}
                             </ul>
@@ -134,8 +151,9 @@ const Weather = () => {
                             <ul>
                                 {forecastData.daily.slice(0, 7).map((day, index) => (
                                     <li key={index}>
-                                        <strong>Day {index + 1}:</strong> {day.temp.day}°C, {day.weather[0].description}, 
-                                        Wind: {day.wind_speed} m/s, Humidity: {day.humidity}%
+                                        <strong>Day {index + 1}:</strong> {day.temp.day}°{unit === 'metric' ? 'C' : 'F'}, 
+                                        {day.weather[0].description}, Wind: {day.wind_speed} {unit === 'metric' ? 'm/s' : 'mph'}, 
+                                        Humidity: {day.humidity}%
                                     </li>
                                 ))}
                             </ul>
